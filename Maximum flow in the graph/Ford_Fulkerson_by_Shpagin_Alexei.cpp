@@ -33,8 +33,7 @@ bool bfs(Graph graph, int source, int sink, vector<int>& parent) { // parent[] -
     return false;
 }
 
-int ford_fulkerson_method(Graph graph, int source, int sink)
-{
+int ford_fulkerson_method(Graph graph, int source, int sink) {
     int maxFlow = 0;
     vector<int> parent(graph.V, -1);
 

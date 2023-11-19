@@ -1,7 +1,6 @@
 #pragma once
 #include <vector>
 
-
 struct Graph
 {
 	Graph(const std::vector<std::vector<int>>& adjacency_matrix) : V(adjacency_matrix.size()) {
