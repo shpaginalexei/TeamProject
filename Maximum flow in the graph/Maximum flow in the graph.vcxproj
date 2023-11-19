@@ -129,10 +129,10 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Ford_Fulkerson_by_Shpagin_Alexei.cpp" />
-    <ClCompile Include="Graph.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Data.h" />
     <ClInclude Include="Graph.h" />
     <ClInclude Include="Algorithms.h" />
   </ItemGroup>

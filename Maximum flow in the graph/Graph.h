@@ -1,25 +1,19 @@
 #pragma once
 #include <vector>
 
-struct Edge
-{
-	int from, to;
-	int capacity;
-	int flow;
-
-	Edge(int from, int to, int capacity)
-		: from(from), to(to), capacity(capacity), flow(0) {}
-
-	int get_capacity() const {
-		return capacity - flow;
-	}
-};
 
 struct Graph
 {
-	Graph(const std::vector<std::vector<int>>&);
+	Graph(const std::vector<std::vector<int>>& adjacency_matrix) : V(adjacency_matrix.size()) {
+		adj.resize(V, std::vector<int>(V, 0));
+
+		for (size_t i = 0; i < V; i++) {
+			for (size_t j = 0; j < V; j++) {
+				adj[i][j] = adjacency_matrix[i][j];
+			}
+		}
+	}
 
 	const int V;
-	std::vector<std::vector<int>> adj; // IDs of Edges, NOT CAPASITY'S
-	std::vector<Edge> edges;	
+	std::vector<std::vector<int>> adj;
 };
