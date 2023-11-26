@@ -29,7 +29,7 @@ int main() {
 	cout << "\n\t Graph 2\n";
 	Graph graph2(adj2);
 	Run(ford_fulkerson_method, graph2, 4, 7, "Ford Fulkerson algorithm (by Shpagin Alexei)");
-	
+	Run(dinitz_algorithm, graph2, 4, 7, "Dinitz algoritm (by Dmitrieva Ekaterina)");
 	// ...
 
 	return 0;
