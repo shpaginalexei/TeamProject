@@ -23,11 +23,13 @@ int main() {
 	cout << "\t Graph 1\n";
 	Graph graph1(adj1);
 	Run(ford_fulkerson_method, graph1, 0, 8, "Ford Fulkerson algorithm (by Shpagin Alexei)");
+	Run(dinitz_algorithm, graph1, 0, 8, "Dinitz algoritm (by Dmitrieva Ekaterina)");
 	// ...
 	
 	cout << "\n\t Graph 2\n";
 	Graph graph2(adj2);
 	Run(ford_fulkerson_method, graph2, 4, 7, "Ford Fulkerson algorithm (by Shpagin Alexei)");
+	
 	// ...
 
 	return 0;
