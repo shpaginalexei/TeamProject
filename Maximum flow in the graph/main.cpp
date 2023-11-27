@@ -5,6 +5,7 @@
 #include <chrono>
 #include <string>
 
+#include "Relabel_to_front.h"
 using namespace std;
 
 
@@ -23,6 +24,9 @@ int main() {
 	cout << "\t Graph 1\n";
 	Graph graph1(adj1);
 	Run(ford_fulkerson_method, graph1, 0, 8, "Ford Fulkerson algorithm (by Shpagin Alexei)");
+
+	RelabelToFront asfjlskf(graph1, 0, 8);
+	std::cout << asfjlskf.max_flow() << std::endl;
 	// ...
 	
 	cout << "\n\t Graph 2\n";
