@@ -25,13 +25,14 @@ int main() {
 	Graph graph1(adj1);
 	Run(ford_fulkerson_method, graph1, 0, 8, "Ford Fulkerson algorithm (by Shpagin Alexei)");
 
-	RelabelToFront asfjlskf(graph1, 0, 8);
-	std::cout << asfjlskf.max_flow() << std::endl;
+	Run(relabel_to_front, graph1, 0, 8, "Relable to front algorithm (by Kotkov Roman)");
 	// ...
 	
 	cout << "\n\t Graph 2\n";
 	Graph graph2(adj2);
 	Run(ford_fulkerson_method, graph2, 4, 7, "Ford Fulkerson algorithm (by Shpagin Alexei)");
+
+	Run(relabel_to_front, graph2, 4, 7, "Relable to front algorithm (by Kotkov Roman)");
 	// ...
 
 	return 0;

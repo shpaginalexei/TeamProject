@@ -2,7 +2,6 @@
 #include <vector>
 #include "Graph.h"
 #include "Data.h"
-#include <stdexcept>
 #include <list>
 #include <unordered_map>
 #include <optional>
@@ -14,14 +13,10 @@ public:
 	using Edge = size_t;
 	
 	struct VertexData {
-
 	};
-
-	// capacity add
 
 	struct EdgeData {
 		Vertex start, end;
-		
 	};
 
 	std::vector <VertexData> vertex_data;
@@ -117,7 +112,6 @@ public:
 		return true;
 	}
 
-	// можно сделать быстрее 
 	std::optional<Edge> find_edge(Vertex u, Vertex v) {
 		auto it = vertex_data[u].edges.find(v);
 		if (it == vertex_data[u].edges.end()) {
@@ -127,11 +121,20 @@ public:
 	}
 
 	void push(Vertex u, Vertex v) {
-		Edge e = find_edge(u, v).value();
-		int dF = std::min(vertex_data[u].excess_flow, edge_data[e].capacity - edge_data[e].flow);
-		edge_data[e].flow += dF;
-		vertex_data[v].excess_flow += dF;
-		vertex_data[u].excess_flow -= dF;
+		std::optional<Edge> e = find_edge(u, v);
+		std::optional<Edge> e1 = find_edge(v, u);
+		if (e.has_value()) {
+			int dF = std::min(vertex_data[u].excess_flow, edge_data[e.value()].capacity - edge_data[e.value()].flow);
+			edge_data[e.value()].flow += dF;
+			vertex_data[v].excess_flow += dF;
+			vertex_data[u].excess_flow -= dF;
+		}
+		if (e1.has_value()) {
+			int dF = std::min(vertex_data[u].excess_flow, edge_data[e1.value()].flow);
+			edge_data[e1.value()].flow -= dF;
+			vertex_data[v].excess_flow += dF;
+			vertex_data[u].excess_flow -= dF;
+		}
 	}
 
 	bool can_relabel(Vertex u) {
@@ -139,10 +142,11 @@ public:
 			return false;
 		}
 		for (Edge e : graph.graph[u]) {
-			if (!is_successor(u, graph.edge_data[e].end)) {
+			Vertex v = (graph.edge_data[e].start == u) ? graph.edge_data[e].end : graph.edge_data[e].start;
+			if (!is_successor(u, v)) {
 				continue;
 			}
-			if (vertex_data[u].height > vertex_data[graph.edge_data[e].end].height) {
+			if (vertex_data[u].height > vertex_data[v].height) {
 				return false;
 			}
 		}
@@ -151,24 +155,28 @@ public:
 
 	void relabel(Vertex u) {
 		int min_height = vertex_data[u].height;
+
 		for (Edge e : graph.graph[u]) {
-			if (!is_successor(u, graph.edge_data[e].end)) {
+			Vertex v = (graph.edge_data[e].start == u) ? graph.edge_data[e].end : graph.edge_data[e].start;
+			if (!is_successor(u,v)) {
 				continue;
 			}
-			min_height = std::min(min_height, vertex_data[graph.edge_data[e].end].height);
+			min_height = std::min(min_height, vertex_data[v].height);
 		}
 		vertex_data[u].height = min_height + 1;
 	}
 
 	bool is_successor(Vertex u, Vertex v) {
 		std::optional<Edge> e = find_edge(u, v);
-		if (!e.has_value()) {
-			return false;
+		std::optional<Edge> e1 = find_edge(v, u);
+
+		if (e.has_value() && edge_data[*e].capacity != edge_data[*e].flow) {
+			return true;
 		}
-		if (edge_data[*e].capacity == edge_data[*e].flow) {
-			return false;
+		else if (e1.has_value() && edge_data[*e1].flow > 0) {
+			return true;;
 		}
-		return true;
+		return false;
 	}
 
 	bool is_acceptable(Vertex u, Vertex v) {
@@ -207,8 +215,7 @@ public:
 
 	int max_flow() {
 		if (vertex_data.size() == 2) {
-			return 0;
-			//дописать
+			return vertex_data[drain].excess_flow;
 		}
 		while (current_element != L.end()) {
 			Vertex u = *current_element;
