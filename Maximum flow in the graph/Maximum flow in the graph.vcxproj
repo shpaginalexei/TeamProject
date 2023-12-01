@@ -129,12 +129,14 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Ford_Fulkerson_by_Shpagin_Alexei.cpp" />
+    <ClCompile Include="Holber_Tarjano_by_Smirnova_Anna.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Data.h" />
     <ClInclude Include="Graph.h" />
     <ClInclude Include="Algorithms.h" />
+    <ClInclude Include="Holber_Tarjano_by_Smirnova_Anna.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -3,7 +3,7 @@
 
 // examples from a presentation from Malinovskaya
 
-// for this graph MAX FLOW MUST BE 29 (0 -> 8)
+//for this graph MAX FLOW MUST BE 29 (0 -> 8)
 const std::vector<std::vector<int>> adj1 = {
 	{0, 14,  0, 23,  0,  0,  0,  0,  0},
 	{0,  0, 10,  9,  0,  0,  0,  0,  0},
@@ -15,6 +15,7 @@ const std::vector<std::vector<int>> adj1 = {
 	{0,  0,  0,  0,  0,  0,  0,  0, 20},
 	{0,  0,  0,  0,  0,  0,  0,  0,  0}
 };
+
 
 // for this graph MAX FLOW MUST BE 26 (4 -> 7)
 const std::vector<std::vector<int>> adj2 = {
@@ -28,3 +29,4 @@ const std::vector<std::vector<int>> adj2 = {
 	{0,  0, 24,  0,  0,  0, 16,  0, 22},
 	{0,  0,  0, 11,  0, 13,  0,  0,  0}
 };
+
