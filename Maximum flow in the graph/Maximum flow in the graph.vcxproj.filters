@@ -21,6 +21,9 @@
     <ClCompile Include="Ford_Fulkerson_by_Shpagin_Alexei.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
+    <ClCompile Include="Flow_Scaling_Caxar.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Graph.h">
