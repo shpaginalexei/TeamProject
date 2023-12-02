@@ -1,106 +1,59 @@
-#include <iostream>
+#include "Graph.h"
+#include <vector>
+
 using namespace std;
 
-#define V 6
+int pushRelabelMaxFlow(Graph graph, int source, int sink) {
+    std::vector<int> height(graph.V, 0);
+    std::vector<int> excess(graph.V, 0);
+    std::vector<std::vector<int>> flow(graph.V, std::vector<int>(graph.V, 0));
 
-// Функция для выполнения relabel операции
-void relabel(int u, int height[], int graph[V][V], int* excess)
-{
-    int minHeight = INT_MAX;
-
-    // Находим минимальную высоту смежных вершин
-    for (int v = 0; v < V; v++)
-    {
-        if (graph[u][v] && height[v] < minHeight)
-        {
-            minHeight = height[v];
-        }
+    // Preflow
+    height[source] = graph.V;
+    for (int i = 0; i < graph.V; ++i) {
+        flow[source][i] = graph.adj[source][i];
+        flow[i][source] = -graph.adj[source][i];
+        excess[i] = graph.adj[source][i];
+        excess[source] -= graph.adj[source][i];
     }
 
-    // Обновляем высоту вершины
-    height[u] = minHeight + 1;
-}
-
-// Функция для выполнения push операции
-void push(int u, int v, int graph[V][V], int* excess, int height[])
-{
-    int flow = min(excess[u], graph[u][v]);
-    excess[u] -= flow;
-    excess[v] += flow;
-    graph[u][v] -= flow;
-    graph[v][u] += flow;
-}
-
-// Функция для вычисления максимального потока
-int maxFlow(int graph[V][V], int source, int sink)
-{
-    // Инициализация предпотока, высоты и избыточного значения
-    int excess[V] = { 0 };
-    int height[V] = { 0 };
-    height[source] = V; // Высота источника
-
-    // Инициализация предпотока из источника
-    for (int v = 0; v < V; v++)
-    {
-        if (graph[source][v])
-        {
-            excess[v] = graph[source][v];
-            excess[source] -= graph[source][v];
-            graph[source][v] = 0;
-            graph[v][source] = graph[source][v];
-        }
-    }
-
-    // Построение предпотока
-    while (true)
-    {
-        bool found = false;
-        for (int u = 0; u < V; u++)
-        {
-            if (u != source && u != sink && excess[u] > 0)
-            {
-                int v;
-                for (v = 0; v < V; v++)
-                {
-                    if (graph[u][v] && height[u] == height[v] + 1)
-                    {
-                        found = true;
-                        push(u, v, graph, excess, height);
-                        break;
-                    }
-                }
-                if (found)
-                {
-                    break;
-                }
+    while (true) {
+        int u = -1;
+        for (int i = 0; i < graph.V; ++i) {
+            if (i != source && i != sink && excess[i] > 0 && (u == -1 || height[i] > height[u])) {
+                u = i;
             }
         }
-        if (!found)
-        {
-            break;
+
+        if (u == -1) {
+            break;  // No more overflowing vertices
+        }
+
+        bool pushed = false;
+        for (int v = 0; v < graph.V; ++v) {
+            if (graph.adj[u][v] - flow[u][v] > 0 && height[u] == height[v] + 1) {
+                int delta = std::min(excess[u], graph.adj[u][v] - flow[u][v]);
+                flow[u][v] += delta;
+                flow[v][u] -= delta;
+                excess[u] -= delta;
+                excess[v] += delta;
+                pushed = true;
+                break;
+            }
+        }
+
+        if (!pushed) {
+            int minHeight = std::numeric_limits<int>::max();
+            for (int v = 0; v < graph.V; ++v) {
+                if (graph.adj[u][v] - flow[u][v] > 0 && height[v] < minHeight) {
+                    minHeight = height[v];
+                }
+            }
+
+            height[u] = minHeight + 1;
         }
     }
 
-    // Максимальный поток равен предпотоку, исходящему из источника
     return excess[sink];
 }
 
-int main()
-{
-    // Исходный граф
-    int graph[V][V] =
-    {
-        {0, 16, 13, 0, 0, 0},
-        {0, 0, 10, 12, 0, 0},
-        {0, 4, 0, 0, 14, 0},
-        {0, 0, 9, 0, 0, 20},
-        {0, 0, 0, 7, 0, 4},
-        {0, 0, 0, 0, 0, 0} };
-
-    int source = 0; // Источник
-    int sink = 5;   // Сточник
-
-    cout << "Максимальный поток: " << maxFlow(graph, source, sink) << endl;
-
-    return 0;
-}

@@ -24,10 +24,12 @@ int main() {
 	Graph graph1(adj1);
 	Run(ford_fulkerson_method, graph1, 0, 8, "Ford Fulkerson algorithm (by Shpagin Alexei)");
 	// ...
+	Run(pushRelabelMaxFlow, graph1, 0, 8, "epishov_protalkivanie)");
 	
 	cout << "\n\t Graph 2\n";
 	Graph graph2(adj2);
 	Run(ford_fulkerson_method, graph2, 4, 7, "Ford Fulkerson algorithm (by Shpagin Alexei)");
+	Run(pushRelabelMaxFlow, graph2, 4, 7, "epishov_protalkivanie)");
 	// ...
 
 	return 0;
