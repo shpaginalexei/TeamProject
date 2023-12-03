@@ -131,6 +131,7 @@
     <ClCompile Include="Dinitz_algorithm_by_Dmitrieva_Ekaterina.cpp" />
     <ClCompile Include="Edmonds_Karp_by_Archakov_Ilyas.cpp" />
     <ClCompile Include="Ford_Fulkerson_by_Shpagin_Alexei.cpp" />
+    <ClCompile Include="Holber_Tarjano_by_Smirnova_Anna.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Relabel_to_front.cpp" />
   </ItemGroup>
@@ -138,6 +139,7 @@
     <ClInclude Include="Data.h" />
     <ClInclude Include="Graph.h" />
     <ClInclude Include="Algorithms.h" />
+    <ClInclude Include="Holber_Tarjano_by_Smirnova_Anna.h" />
     <ClInclude Include="Relabel_to_front.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

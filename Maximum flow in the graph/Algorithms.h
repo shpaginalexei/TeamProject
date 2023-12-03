@@ -13,3 +13,6 @@ int dinitz_algorithm(Graph graph, int sourse, int sink);
 
 // Method by Kotkov Roman
 int relabel_to_front(Graph graph, int source, int drain);
+
+// Method by Smirnova Anna
+int golber_tarjano_algorithm(Graph graph, int source, int sink);

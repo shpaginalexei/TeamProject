@@ -21,6 +21,9 @@
     <ClCompile Include="Ford_Fulkerson_by_Shpagin_Alexei.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
+    <ClCompile Include="Holber_Tarjano_by_Smirnova_Anna.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
     <ClCompile Include="Relabel_to_front.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
@@ -36,6 +39,9 @@
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
     <ClInclude Include="Data.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="Holber_Tarjano_by_Smirnova_Anna.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
     <ClInclude Include="Relabel_to_front.h">
