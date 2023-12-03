@@ -21,6 +21,9 @@
     <ClCompile Include="Ford_Fulkerson_by_Shpagin_Alexei.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
+    <ClCompile Include="epishov_protalkivanie.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
     <ClCompile Include="Holber_Tarjano_by_Smirnova_Anna.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>

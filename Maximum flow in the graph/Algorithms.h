@@ -16,3 +16,6 @@ int relabel_to_front(Graph graph, int source, int drain);
 
 // Method by Smirnova Anna
 int golber_tarjano_algorithm(Graph graph, int source, int sink);
+
+// method pushRelabelMaxFlow
+int pushRelabelMaxFlow(Graph graph, int source, int sink);

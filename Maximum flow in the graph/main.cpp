@@ -28,15 +28,17 @@ int main() {
 	Run(dinitz_algorithm, graph1, 0, 8, "Dinitz algoritm (by Dmitrieva Ekaterina)");
   Run(relabel_to_front, graph1, 0, 8, "Relable to front algorithm (by Kotkov Roman)");
   Run(golber_tarjano_algorithm, graph1, 0, 8, "Golber-Tarjano algorithm (by Smirnova Anna)");
-	// ...
+  Run(pushRelabelMaxFlow, graph1, 0, 8, "epishov_protalkivanie)");
+	// ...	
 	
 	cout << "\n\t Graph 2\n";
 	Graph graph2(adj2);
-	Run(ford_fulkerson_method, graph2, 4, 7, "Ford Fulkerson algorithm (by Shpagin Alexei)");
+	Run(ford_fulkerson_method, graph2, 4, 7, "Ford Fulkerson algorithm (by Shpagin Alexei)");	
 	Run(edmonds_karp_algorithm, graph2, 4, 7, "Edmonds Karp algorithm (by Archakov Ilyas)");
 	Run(dinitz_algorithm, graph2, 4, 7, "Dinitz algoritm (by Dmitrieva Ekaterina)");	
   Run(relabel_to_front, graph2, 4, 7, "Relable to front algorithm (by Kotkov Roman)");
   Run(golber_tarjano_algorithm, graph2, 4, 7, "Golber-Tarjano algorithm (by Smirnova Anna)");
+  Run(pushRelabelMaxFlow, graph2, 4, 7, "epishov_protalkivanie)");
 	// ...
   
 	return 0;
