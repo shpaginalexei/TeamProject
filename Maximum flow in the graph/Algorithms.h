@@ -19,3 +19,6 @@ int golber_tarjano_algorithm(Graph graph, int source, int sink);
 
 // method pushRelabelMaxFlow
 int pushRelabelMaxFlow(Graph graph, int source, int sink);
+
+// Algorithm by Caxar
+int FlowScalingAlgorithm(Graph graph, int source, int sink);

@@ -29,6 +29,7 @@ int main() {
   Run(relabel_to_front, graph1, 0, 8, "Relable to front algorithm (by Kotkov Roman)");
   Run(golber_tarjano_algorithm, graph1, 0, 8, "Golber-Tarjano algorithm (by Smirnova Anna)");
   Run(pushRelabelMaxFlow, graph1, 0, 8, "epishov_protalkivanie)");
+  Run(FlowScalingAlgorithm, graph1, 0, 8, "Flow Scaling algorithm (by Caxar)");
 	// ...	
 	
 	cout << "\n\t Graph 2\n";
@@ -39,6 +40,7 @@ int main() {
   Run(relabel_to_front, graph2, 4, 7, "Relable to front algorithm (by Kotkov Roman)");
   Run(golber_tarjano_algorithm, graph2, 4, 7, "Golber-Tarjano algorithm (by Smirnova Anna)");
   Run(pushRelabelMaxFlow, graph2, 4, 7, "epishov_protalkivanie)");
+  Run(FlowScalingAlgorithm, graph2, 4, 7, "Flow Scaling algorithm (by Caxar)");
 	// ...
   
 	return 0;
