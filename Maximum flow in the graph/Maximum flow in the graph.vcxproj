@@ -132,11 +132,13 @@
     <ClCompile Include="Edmonds_Karp_by_Archakov_Ilyas.cpp" />
     <ClCompile Include="Ford_Fulkerson_by_Shpagin_Alexei.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Relabel_to_front.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Data.h" />
     <ClInclude Include="Graph.h" />
     <ClInclude Include="Algorithms.h" />
+    <ClInclude Include="Relabel_to_front.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
