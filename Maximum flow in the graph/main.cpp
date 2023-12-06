@@ -18,9 +18,9 @@ void RunAllTests(Algorithm alg, vector<DataUnit> data, string description) {
 	int t = 0;
 	for (const auto& unit : data) {
 		for (int i = 0; i < 10; i++) {
-			auto start = std::chrono::system_clock::now();
+			auto start = std::chrono::high_resolution_clock::now();
 			res = alg(unit.graph, unit.source, unit.sink);
-			auto stop = std::chrono::system_clock::now();
+			auto stop = std::chrono::high_resolution_clock::now();
 			time += std::chrono::duration_cast<std::chrono::microseconds>(stop - start).count();
 		}
 		++t;
@@ -37,9 +37,9 @@ void RunAllTests(vector<DataUnit> data, string description) {
 	for (const auto& unit : data) {
 		T strc(unit.graph, unit.source, unit.sink);
 		for (int i = 0; i < 10; i++) {
-			auto start = std::chrono::system_clock::now();
+			auto start = std::chrono::high_resolution_clock::now();
 			res = strc.max_flow();
-			auto stop = std::chrono::system_clock::now();
+			auto stop = std::chrono::high_resolution_clock::now();
 			time += std::chrono::duration_cast<std::chrono::microseconds>(stop - start).count();
 		}
 		++t;
@@ -53,6 +53,11 @@ int main() {
 	vector<DataUnit> data = {
 		DataUnit(adj1, 0, 8),
 		DataUnit(adj2, 4, 7),
+		DataUnit(adj3, 12, 0), // Samara -> Moscow
+		DataUnit(adj3, 0, 18), // Moscow -> Kursk
+		DataUnit(adj3, 0, 3),  // Moscow -> SPB
+		DataUnit(adj3, 8, 0),  // NN -> Moscow
+
 		// NTWRK
 		//DataUnit(5, 10, 1000, 0, 51, "5_10.txt"),
 		//DataUnit(10, 10, 1000, 0, 101, "10_10.txt"),
