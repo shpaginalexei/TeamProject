@@ -36,7 +36,10 @@
     <ClCompile Include="Dinitz_algorithm_by_Dmitrieva_Ekaterina.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-	<ClCompile Include="Edmonds_Karp_by_Archakov_Ilyas.cpp">
+    <ClCompile Include="Edmonds_Karp_by_Archakov_Ilyas.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="Data.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
   </ItemGroup>

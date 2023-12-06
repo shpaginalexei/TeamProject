@@ -4,40 +4,35 @@
 
 using namespace std;
 
-bool bfs(Graph graph, int source, int sink, vector<int>& parent) { // parent[] -> path
-    vector<bool> visited(graph.V, false);
-    queue<int> q;
-    q.push(source);
-    visited[source] = true;
-    parent[source] = -1;
+bool dfs(const Graph& graph, int u, int sink, vector<bool>& visited, vector<int>& parent) {
+    visited[u] = true;
 
-    while (!q.empty()) {
-        int u = q.front();
-        q.pop();
+    for (int v = 0; v < graph.V; v++) {
+        if (!visited[v] && graph.adj[u][v] > 0) {
+            parent[v] = u;
 
-        for (int v = 0; v < graph.V; v++) {
-            if (visited[v] == false && graph.adj[u][v] > 0) {
+            if (v == sink) {
+                return true;
+            }
 
-                if (v == sink) {
-                    parent[v] = u;
-                    return true;
-                }
-
-                parent[v] = u;
-                visited[v] = true;
-                q.push(v);
-
+            if (dfs(graph, v, sink, visited, parent)) {
+                return true;
             }
         }
     }
+
     return false;
 }
 
 int ford_fulkerson_method(Graph graph, int source, int sink) {
     int maxFlow = 0;
-    vector<int> parent(graph.V, -1);
 
-    while (bfs(graph, source, sink, parent)) {
+    while (true) {
+        vector<bool> visited(graph.V, false);
+        vector<int> parent(graph.V, -1);
+        if (!dfs(graph, source, sink, visited, parent)) {
+            break;
+        }
         int pathFlow = INT_MAX;
 
         for (int v = sink; v != source; v = parent[v]) {

@@ -6,40 +6,94 @@
 #include <string>
 
 #include "Relabel_to_front.h"
+#include "Holber_Tarjano_by_Smirnova_Anna.h"
+
 using namespace std;
 
 
-void Run(Algorithm alg, Graph& graph, int source, int sink, string description) {
-	auto start = chrono::system_clock::now();
-	int res = alg(graph, source, sink);
-	auto stop = chrono::system_clock::now();
-	auto time = chrono::duration_cast<chrono::microseconds>(stop - start).count();
+void RunAllTests(Algorithm alg, vector<DataUnit> data, string description) {
+	cout << description << endl;
+	long long time = 0;
+	int res = -1;
+	int t = 0;
+	for (const auto& unit : data) {
+		for (int i = 0; i < 10; i++) {
+			auto start = std::chrono::system_clock::now();
+			res = alg(unit.graph, unit.source, unit.sink);
+			auto stop = std::chrono::system_clock::now();
+			time += std::chrono::duration_cast<std::chrono::microseconds>(stop - start).count();
+		}
+		++t;
+		cout << "Graph " << t << " : " << res << " (" << time / 10. << " us)" << endl;
+	}	
+}
 
-	cout << description << "\nMax flow = " << res  << " (" << time << " msc)" << endl;
+template <typename T>
+void RunAllTests(vector<DataUnit> data, string description) {
+	cout << description << endl;
+	long long time = 0;
+	int res = -1;
+	int t = 0;
+	for (const auto& unit : data) {
+		T strc(unit.graph, unit.source, unit.sink);
+		for (int i = 0; i < 10; i++) {
+			auto start = std::chrono::system_clock::now();
+			res = strc.max_flow();
+			auto stop = std::chrono::system_clock::now();
+			time += std::chrono::duration_cast<std::chrono::microseconds>(stop - start).count();
+		}
+		++t;
+		cout << "Graph " << t << " : " << res << " (" << time / 10. << " us)" << endl;
+	}	
 }
 
 
 int main() {
 
-	cout << "\t Graph 1\n";
-	Graph graph1(adj1);
-	Run(ford_fulkerson_method, graph1, 0, 8, "Ford Fulkerson algorithm (by Shpagin Alexei)");
-    Run(edmonds_karp_algorithm, graph1, 0, 8, "Edmonds Karp algorithm (by Archakov Ilyas)");
-	Run(dinitz_algorithm, graph1, 0, 8, "Dinitz algoritm (by Dmitrieva Ekaterina)");
-    Run(relabel_to_front, graph1, 0, 8, "Relable to front algorithm (by Kotkov Roman)");
-    Run(golber_tarjano_algorithm, graph1, 0, 8, "Golber-Tarjano algorithm (by Smirnova Anna)");
-    Run(pushRelabelMaxFlow, graph1, 0, 8, "epishov_protalkivanie)");
-    Run(FlowScalingAlgorithm, graph1, 0, 8, "Flow Scaling algorithm (by Caxar)");
-	
-	cout << "\n\t Graph 2\n";
-	Graph graph2(adj2);
-	Run(ford_fulkerson_method, graph2, 4, 7, "Ford Fulkerson algorithm (by Shpagin Alexei)");	
-	Run(edmonds_karp_algorithm, graph2, 4, 7, "Edmonds Karp algorithm (by Archakov Ilyas)");
-	Run(dinitz_algorithm, graph2, 4, 7, "Dinitz algoritm (by Dmitrieva Ekaterina)");	
-    Run(relabel_to_front, graph2, 4, 7, "Relable to front algorithm (by Kotkov Roman)");
-    Run(golber_tarjano_algorithm, graph2, 4, 7, "Golber-Tarjano algorithm (by Smirnova Anna)");
-    Run(pushRelabelMaxFlow, graph2, 4, 7, "epishov_protalkivanie)");
-    Run(FlowScalingAlgorithm, graph2, 4, 7, "Flow Scaling algorithm (by Caxar)");
-  
+	vector<DataUnit> data = {
+		DataUnit(adj1, 0, 8),
+		DataUnit(adj2, 4, 7),
+		// NTWRK
+		//DataUnit(5, 10, 1000, 0, 51, "5_10.txt"),
+		//DataUnit(10, 10, 1000, 0, 101, "10_10.txt"),
+		//DataUnit(15, 10, 1000, 0, 151, "15_10.txt"),
+		//DataUnit(20, 10, 1000, 0, 201, "20_10.txt"),
+		//DataUnit(5, 20, 1000, 0, 101, "5_20.txt"),
+		//DataUnit(10, 20, 1000, 0, 201, "10_20.txt"),
+		//DataUnit(15, 20, 1000, 0, 301, "15_20.txt"),
+		//DataUnit(20, 20, 1000, 0, 401, "20_20.txt"),
+		//DataUnit(5, 30, 1000, 0, 151, "5_30.txt"),
+		//DataUnit(10, 30, 1000, 0, 301, "10_30.txt"),
+		//DataUnit(15, 30, 1000, 0, 451, "15_30.txt"),
+		//DataUnit(20, 30, 1000, 0, 601, "20_30.txt"),
+		// V
+		//DataUnit("adj_50.txt", 50, 1000, 2, 0, 49),
+		//DataUnit("adj_100.txt", 100, 1000, 2, 0, 99),
+		//DataUnit("adj_200.txt", 200, 1000, 2, 0, 199),
+		//DataUnit("adj_300.txt", 300, 1000, 2, 0, 299),
+		//DataUnit("adj_400.txt", 400, 1000, 2, 0, 399),
+		//DataUnit("adj_500.txt", 500, 1000, 2, 0, 499),
+		//DataUnit("adj_600.txt", 600, 1000, 0, 0, 599),
+		//DataUnit("adj_700.txt", 700, 1000, 0, 0, 699),
+		//DataUnit("adj_800.txt", 800, 1000, 0, 0, 799),
+		//DataUnit("adj_900.txt", 900, 1000, 0, 0, 899),
+		//DataUnit("adj_1000.txt", 1000, 1000, 0, 0, 999),
+		// CAP
+		//DataUnit("adj_100.txt", 100, 1000, 2, 0, 99),
+		//DataUnit("adj_100.txt", 100, 10000, 2, 0, 99),
+		//DataUnit("adj_100.txt", 100, 100000, 2, 0, 99),
+		//DataUnit("adj_100.txt", 100, 1000000, 2, 0, 99),
+		//DataUnit("adj_100.txt", 100, 10000000, 2, 0, 99),
+		//DataUnit("adj_100.txt", 100, 100000000, 2, 0, 99),
+	};
+
+	RunAllTests(dinitz_algorithm, data, "Dinitz algoritm (by Dmitrieva Ekaterina)");
+	RunAllTests(dinitz_algorithm, data, "epishov_protalkivanie");
+	RunAllTests(dinitz_algorithm, data, "Flow Scaling algorithm (by Caxar)");
+	RunAllTests<HolberTajano>(data, "Golber-Tarjano algorithm (by Smirnova Anna)");
+	RunAllTests(ford_fulkerson_method, data, "Ford Fulkerson algorithm (by Shpagin Alexei)");
+	RunAllTests(edmonds_karp_algorithm, data, "Edmonds Karp algorithm (by Archakov Ilyas)");	
+	RunAllTests<RelabelToFront>(data, "Relable to front algorithm (by Kotkov Roman)");
+
 	return 0;
 }

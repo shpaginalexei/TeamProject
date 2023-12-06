@@ -1,4 +1,5 @@
 #include "Graph.h"
+#include "Holber_Tarjano_by_Smirnova_Anna.h"
 
 using Algorithm = int(*)(Graph, int, int);
 

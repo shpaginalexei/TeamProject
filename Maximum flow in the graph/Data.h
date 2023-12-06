@@ -1,5 +1,8 @@
 #pragma once
+#include "Graph.h"
 #include <vector>
+#include <string>
+#include <fstream>
 
 // examples from a presentation from Malinovskaya
 
@@ -30,3 +33,22 @@ const std::vector<std::vector<int>> adj2 = {
 	{0,  0,  0, 11,  0, 13,  0,  0,  0}
 };
 
+std::vector<std::vector<int>> GenerateRandomAdj(const int V, const int max_cap, const int alpha, const std::string file_name);
+std::vector<std::vector<int>> GenFullyDenseAcyclicNetwork(const int V_of_one_laler, const int max_cap, const int count_of_layers, const std::string file_name);
+
+struct DataUnit
+{
+	DataUnit(const std::vector<std::vector<int>>& adj, const int source, const int sink)
+		: graph(Graph(adj)), source(source), sink(sink) {}
+
+	DataUnit(const std::string file_name, const int V, const int max_capacity, const int alpha, const int source, const int sink)
+		: graph(Graph(GenerateRandomAdj(V, max_capacity, alpha, file_name))), source(source), sink(sink) {}
+
+	DataUnit(const int V_of_one_laler, const int count_of_layers, const int max_capacity, const int source, const int sink, const std::string file_name)
+		: graph(Graph(GenFullyDenseAcyclicNetwork(V_of_one_laler, max_capacity, count_of_layers, file_name))), source(source), sink(sink) {}
+
+
+	const Graph graph;
+	const int source;
+	const int sink;
+};

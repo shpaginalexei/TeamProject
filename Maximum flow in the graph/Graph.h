@@ -13,7 +13,6 @@ struct Graph
 		}
 	}
 
-	const size_t V;
+	const int V;
 	std::vector<std::vector<int>> adj;
 };
-
